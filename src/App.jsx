@@ -18,26 +18,21 @@ function App() {
 
     useEffect(() => {
         ; (async () => {
-            console.log(1);
             try {
-                console.log(2);
                 const sessions = await authService.getAllSessions()
                 if (!sessions) {
-                    console.log(3);
                     dispatch(storeLogout())
                     navigate('/login')
                 } else {
                     console.log(4);
                     const user = await authService.getCurrentUser()
                     if (user) {
-                        console.log(5);
                         dispatch(storeLogin(user))
                         navigate('/')
                     }
                 }
             } catch (error) {
                 console.log(error);
-                throw error;
             }
             setLoading(false)
         })()

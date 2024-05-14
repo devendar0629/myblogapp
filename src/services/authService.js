@@ -11,8 +11,6 @@ export class AuthService {
             .setEndpoint(config.appwriteUrl)
             .setProject(config.appwriteProjectId)
 
-        console.log('AURL: ',config.appwriteUrl);
-
         this.account = new Account(this.client);
     }
 
