@@ -1,4 +1,4 @@
-import { Client, Account, Query } from 'appwrite'
+import { Client, Account } from 'appwrite'
 import config from '../config/config'
 
 export class AuthService {
@@ -10,6 +10,8 @@ export class AuthService {
         this.client
             .setEndpoint(config.appwriteUrl)
             .setProject(config.appwriteProjectId)
+
+        console.log(config.appwriteUrl)
 
         this.account = new Account(this.client);
     }
@@ -52,8 +54,8 @@ export class AuthService {
         try {
             return await this.account.listSessions()
         } catch (error) {
+            console.log(`${error.code} : ${error.message}`);
             throw error;
-            // console.log(`${error.code} : ${error.message}`);
         }
     }
 

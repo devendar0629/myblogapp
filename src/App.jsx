@@ -31,7 +31,7 @@ function App() {
                     }
                 }
             } catch (error) {
-                console.log(`${error.message}`);
+                throw error;
             }
             setLoading(false)
         })()
