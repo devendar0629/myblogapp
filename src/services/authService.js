@@ -11,7 +11,7 @@ export class AuthService {
             .setEndpoint(config.appwriteUrl)
             .setProject(config.appwriteProjectId)
 
-        console.log(config.appwriteUrl)
+        console.log('AURL: ',config.appwriteUrl);
 
         this.account = new Account(this.client);
     }
@@ -54,7 +54,7 @@ export class AuthService {
         try {
             return await this.account.listSessions()
         } catch (error) {
-            console.log(`${error.code} : ${error.message}`);
+            console.log(`INSERVICE: ${error.code} : ${error.message}`);
             throw error;
         }
     }
