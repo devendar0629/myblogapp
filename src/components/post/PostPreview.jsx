@@ -22,9 +22,9 @@ function PostPreview({ post }) {
                 }
 
                 {
-                    post && <section className="flex flex-nowrap gap-[1.2rem] grow min-w-[20vw] cursor-pointer rounded-lg" onClick={handlePostClick}>
-                        <img className="rounded-lg align-bottom shadow-md" height={150} width={150} src={storageService.getFilePreview(post.fileId)} alt="" />
-                        <p className="text-lg py-2 px-4 rounded-lg shadow-md min-w-[20vw] grow bg-[#EEE]">{post.content}</p>
+                    post && <section className="flex flex-wrap gap-2 lg:gap-[1.2rem] grow min-w-[20vw] cursor-pointer rounded-lg" onClick={handlePostClick}>
+                        <img className="rounded-lg md:h-[250px] lg:h-[300px] lg:w-full sm:w-full sm:h-full grow-[1.25] align-bottom shadow-md" height={150} width={150} src={storageService.getFilePreview(post.fileId)} alt="" />
+                        <p className="text-lg py-2 px-4 rounded-lg shadow-md min-w-[20vw] bg-[#EEE] grow-[1]">{post.content}</p>
                     </section>
                 }
 
