@@ -1,10 +1,11 @@
-import React from "react"
+import React, { useState } from "react"
 import { useForm } from 'react-hook-form'
 import authService from '../services/authService'
 import Input from './utilities/Input'
 import { useNavigate } from "react-router-dom"
 import { login as storeLogin } from '../features/authSlice'
 import { useDispatch } from "react-redux"
+import Spinner from "./utilities/Spinner"
 
 function Login() {
 
@@ -13,8 +14,10 @@ function Login() {
 
     const { handleSubmit, register } = useForm()
     let [errors,setErrors] = React.useState(null)
+    let [loading,setLoading] = useState(false)
 
     const handleLogin = async (data) => {
+        setLoading(true)
         try {
             setErrors(false)
             const resp = await authService.login(data);
@@ -25,7 +28,9 @@ function Login() {
                     navigate('/')
                 }
             }
+        setLoading(false)
         } catch (error) {
+            setLoading(false)
             if(error.code == 401)
                 setErrors(error.message)
         }
@@ -47,6 +52,7 @@ function Login() {
                     </section>}
 
                     <button className="text-[#222831] font-semibold text-lg bg-[#00ADB5] w-[37.5vw] rounded-md py-[.28rem] pb-2 mt-5">Login</button>
+                    {loading && <Spinner />}
 
                 </form>
             </section>

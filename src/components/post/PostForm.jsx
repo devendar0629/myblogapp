@@ -5,6 +5,7 @@ import storageService from '../../services/storageService'
 import { useSelector } from "react-redux"
 import { useNavigate, useParams } from 'react-router-dom'
 import { Query, ID } from "appwrite"
+import Spinner from "../utilities/Spinner"
 
 function PostForm() {
 
@@ -158,7 +159,7 @@ function PostForm() {
                     />
                     <button className="text-[#222] w-[60%] rounded-md px-3 pt-[0.12rem] font-medium pb-[.25rem] text-md lg:text-lg bg-sky-400 select-none hover:opacity-85">Post</button>
                     {isUploading && <div>
-                        <p className="">Uploading ...</p>
+                        <Spinner className="border-[#171717] border-t-slate-50" />
                     </div>}
                 </form>
             </section>

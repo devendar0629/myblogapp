@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { useForm } from 'react-hook-form'
 import authService from '../services/authService'
 import Input from './utilities/Input'
@@ -6,17 +6,21 @@ import { ID } from "appwrite"
 import { useNavigate } from "react-router-dom"
 import { login as storeLogin } from "../features/authSlice"
 import { useDispatch } from "react-redux"
+import Spinner from "./utilities/Spinner"
 
 function Signup() {
 
     const { handleSubmit, register } = useForm()
     let [errors, setErrors] = React.useState(null);
+    let [loading,setLoading] = useState(false)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const handleSignup = async (data) => {
         try {
+            setLoading(true)
+            setErrors(null)
             if (data.password !== data.confirm) {
                 setErrors('Passwords don\'t match !');
                 return;
@@ -36,7 +40,10 @@ function Signup() {
                     navigate('/')
                 }
             }
+            setLoading(false)
         } catch (error) {
+            setLoading(false)
+            setErrors(error.message)
             console.log(`${error.code} : ${error.message}`);
         }
     }
@@ -54,7 +61,7 @@ function Signup() {
 
                     <section className="px-7 gap-4 mx-auto flex flex-nowrap">
                         <label className="text-[#454545] whitespace-nowrap font-semibold text-lg">Bio : </label>
-                        <textarea maxLength={96} {...register("bio", { required: false })} className="bg-[#aaa] placeholder:text-[1rem] focus:outline-none rounded-md w-[15rem] mx-auto placeholder:text-[#222] text-[#222] max-h-[8vh] py-2 text-[1.1rem]" placeholder="Something about you ..."></textarea>
+                        <textarea maxLength={96} {...register("bio", { required: false })} className="bg-[#aaa] placeholder:text-[1rem] focus:outline-none rounded-md pl-3 w-[15rem] mx-auto placeholder:text-[#222] text-[#222] max-h-[8vh] py-2 text-[1.1rem]" placeholder="Something about you ..."></textarea>
                     </section>
 
                     {errors && <section className="text-red-600 font-medium">
@@ -62,6 +69,7 @@ function Signup() {
                     </section>}
 
                     <button className="text-[#2b2b2b] font-semibold text-lg bg-[#00ADB5] w-[37.5vw] rounded-md py-[.3rem] pb-2 mt-3">Signup</button>
+                    {loading && <Spinner />}
 
                 </form>
             </section>

@@ -1,9 +1,10 @@
-import React from "react"
+import React, { useState } from "react"
 import { useLocation, useNavigate, useParams } from "react-router-dom"
 import storageService from "../../services/storageService"
 import Loading from "../utilities/Loading";
 import { Query } from "appwrite";
 import { useSelector } from "react-redux";
+import Spinner from "../utilities/Spinner";
 
 function Post() {
 
@@ -11,6 +12,7 @@ function Post() {
 
     let [post, setPost] = React.useState(null)
     let [loading, setLoading] = React.useState(false)
+    let [deleting,setDeleting] = useState(false)
     const [isOwner, setIsOwner] = React.useState(false)
     const [comments, setComments] = React.useState(null)
 
@@ -20,15 +22,18 @@ function Post() {
 
     const handlePostDelete = async () => {
         try {
+            setDeleting(true)
             const fileDelete = await storageService.deleteFile(post.fileId)
             if (fileDelete) {
                 const postDelete = await storageService.deletePost(post.$id)
-
+                
                 if (postDelete) {
                     navigate(-1)
                 }
             }
+            setDeleting(false)
         } catch (error) {
+            setDeleting(false)
             console.log(`${error.code} : ${error.message}`);
         }
     }
@@ -67,6 +72,10 @@ function Post() {
                             <button onClick={handlePostEdit} className="px-3 rounded-md text-center py-[0.3rem] select-none bg-green-600">✏️</button>
                             <button onClick={handlePostDelete} className="px-3 rounded-md text-center py-[0.35rem] select-none bg-red-500">🗑️</button>
                         </section>
+                    }
+
+                    {
+                        deleting && <Spinner />
                     }
 
                     <section className="w-full bg-[#ddd] rounded-md py-2 flex flex-nowrap flex-col gap-2 px-6">

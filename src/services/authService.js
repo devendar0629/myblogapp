@@ -25,7 +25,7 @@ export class AuthService {
                 name
             )
         } catch (error) {
-            console.log(`${error.code} : ${error.message}`);
+            throw error;
         }
     }
 
