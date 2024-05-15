@@ -86,7 +86,7 @@ function Post() {
                             </section>
                         }
                         <img className="align-bottom -mt-2 bg-gray-400 rounded-lg shadow-2xl w-full h-[20rem]" src={storageService.getFilePreview(post.fileId, 1050, 1000)} alt="" />
-                        <p className="font-medium whitespace-nowrap text-lg">{post.content}</p>
+                        <p className="font-medium text-lg my-[.35rem]">{post.content}</p>
                     </section>
 
                     <section className="bg-gray-300 w-full py-3 px-6 rounded-md">
