@@ -9,7 +9,8 @@ import { Query, ID } from "appwrite"
 function PostForm() {
 
     const userData = useSelector(state => state.userData)
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    let [isUploading,setIsUploading] = React.useState(false)
     let [previousPost, setPreviousPost] = React.useState(null)
 
     const getDateAsString = (date) => {
@@ -70,6 +71,7 @@ function PostForm() {
 
     const handlePost = async (data) => {
         try {
+            setIsUploading(true)
             if (postid) {
                 if (data.file.length >= 1) {
                     let fileUpload = await storageService.uploadFile(data.file[0])
@@ -120,7 +122,9 @@ function PostForm() {
                     }
                 }
             }
+            setIsUploading(false)
         } catch (error) {
+            setIsUploading(false)
             console.log(`${error.code} : ${error.message}`);
         }
     }
@@ -128,11 +132,11 @@ function PostForm() {
     return (
         <>
             <section className="mt-8">
-                <form onSubmit={handleSubmit(handlePost)} className="bg-[#171717] flex flex-col px-10 py-10 rounded-lg shadow-lg items-center flex-nowrap w-full gap-7">
+                <form onSubmit={handleSubmit(handlePost)} className="bg-[#171717] flex flex-col px-6 py-6 lg:px-10 lg:py-10 rounded-lg shadow-lg items-center flex-nowrap w-full gap-7">
                     <Input
-                        labelClassName={'text-[#EEE] text-lg font-medium whitespace-nowrap'}
-                        inputClassName={'file:rounded-lg hover:file:bg-sky-600 hover:file:shadow-lg hover:file:text-[#fff] file:text-lg mr-[-20px] file:font-medium font-medium text-[#eee] file:px-3 file:py-[.195rem] file:cursor-pointer file:bg-white file:mr-3 file:border-none shadow-md'}
-                        containerClassName={'flex flex-row gap-3 items-center'}
+                        labelClassName={'text-[#EEE] text-md lg:text-lg font-medium whitespace-nowrap'}
+                        inputClassName={'file:rounded-lg hover:file:bg-sky-600 hover:file:shadow-lg hover:file:text-[#fff] file:text-lg mr-[-20px] file:font-medium font-medium text-[#eee] lg:file:px-3 file:py-[.195rem] file:cursor-pointer file:bg-white lg:file:mr-3 file:border-none shadow-md'}
+                        containerClassName={'flex flex-row gap-2 ml-10 lg:ml-0 items-center'}
                         initialStyles={false}
                         label='Image : '
                         type='file'
@@ -144,15 +148,18 @@ function PostForm() {
                         </section>
                     }
                     <Input
-                        labelClassName={'text-[#EEE] font-medium whitespace-nowrap text-lg'}
+                        labelClassName={'text-[#EEE] font-medium whitespace-nowrap text-md lg:text-lg'}
                         initialStyles={false}
                         containerClassName={'flex flex-nowrap gap-2 items-center'}
-                        inputClassName={'rounded-md font-medium bg-[#999] pt-[.1rem] pb-[.2rem] px-3.5 text-lg focus:outline-none'}
+                        inputClassName={'rounded-md font-medium bg-[#999] pt-[.1rem] pb-[.2rem] px-3.5 text-md lg:text-lg focus:outline-none'}
                         type='text'
                         label='Message : '
                         {...register("message", { required: true })}
                     />
-                    <button className="text-[#222] w-[60%] rounded-md px-3 pt-[0.12rem] font-medium pb-[.25rem] text-lg bg-sky-400 select-none hover:opacity-85">Post</button>
+                    <button className="text-[#222] w-[60%] rounded-md px-3 pt-[0.12rem] font-medium pb-[.25rem] text-md lg:text-lg bg-sky-400 select-none hover:opacity-85">Post</button>
+                    {isUploading && <div>
+                        <p className="">Uploading ...</p>
+                    </div>}
                 </form>
             </section>
         </>

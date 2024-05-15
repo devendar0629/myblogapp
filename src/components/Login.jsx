@@ -4,7 +4,7 @@ import authService from '../services/authService'
 import Input from './utilities/Input'
 import { useNavigate } from "react-router-dom"
 import { login as storeLogin } from '../features/authSlice'
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 
 function Login() {
 
@@ -28,8 +28,6 @@ function Login() {
         } catch (error) {
             if(error.code == 401)
                 setErrors(error.message)
-
-            console.log(`${error.code} : ${error.message}`);
         }
     }
 
@@ -37,12 +35,12 @@ function Login() {
         <>
             <section className="grow bg-slate-400 py-10">
                 <p className="text-center font-bold text-3xl underline underline-offset-3">Login</p>
-                <form className="bg-[#fff] shadow-xl py-12 rounded-md flex flex-col flex-nowrap items-center justify-center gap-6 mt-10 w-[66%] mx-auto" onSubmit={handleSubmit(handleLogin)}>
+                <form className="bg-[#fff] shadow-xl py-12 rounded-md flex flex-col flex-nowrap items-center justify-center gap-6 mt-10 lg:w-[66%] w-[92%] mx-auto" onSubmit={handleSubmit(handleLogin)}>
 
-                    <Input labelClassName={'text-[#454545] font-semibold text-lg'} containerClassName={'flex justify-center gap-4'} label={'Email : '} type={'email'} {...register("email", {
+                    <Input labelClassName={'text-[#454545] font-semibold text-md lg:text-lg flex-nowrap'} containerClassName={'flex justify-center gap-4'} label={'Email : '} type={'email'} {...register("email", {
                         required: true
                     })} />
-                    <Input label={'Password : '} labelClassName={'text-[#454545] font-semibold text-lg'} containerClassName={'flex justify-center gap-4'} type={'password'} {...register("password",{ required:true })} />
+                    <Input label={'Password : '} labelClassName={'text-[#454545] text-md lg:text-lg font-semibold'} containerClassName={'flex justify-center gap-4'} type={'password'} {...register("password",{ required:true })} />
 
                     {errors && <section className="text-red-600 font-medium">
                         {errors}

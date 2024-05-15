@@ -24,7 +24,6 @@ function App() {
                     dispatch(storeLogout())
                     navigate('/login')
                 } else {
-                    console.log(4);
                     const user = await authService.getCurrentUser()
                     if (user) {
                         dispatch(storeLogin(user))

@@ -52,7 +52,6 @@ export class AuthService {
         try {
             return await this.account.listSessions()
         } catch (error) {
-            console.log(`INSERVICE: ${error.code} : ${error.message}`);
             throw error;
         }
     }
