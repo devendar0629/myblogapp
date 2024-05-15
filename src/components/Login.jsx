@@ -39,15 +39,15 @@ function Login() {
     return (
         <>
             <section className="grow bg-slate-400 py-10">
-                <p className="text-center font-bold text-3xl underline underline-offset-3">Login</p>
+                <p className="text-center font-bold text-2xl lg:text-3xl underline underline-offset-3">Login</p>
                 <form className="bg-[#fff] shadow-xl py-12 rounded-md flex flex-col flex-nowrap items-center justify-center gap-6 mt-10 lg:w-[66%] w-[92%] mx-auto" onSubmit={handleSubmit(handleLogin)}>
 
-                    <Input labelClassName={'text-[#454545] font-semibold text-md lg:text-lg flex-nowrap'} containerClassName={'flex justify-center gap-4'} label={'Email : '} type={'email'} {...register("email", {
+                    <Input labelClassName={'text-[#454545] font-semibold text-[.95rem] lg:text-lg flex-nowrap'} containerClassName={'flex items-center justify-center gap-4'} label={'Email : '} type={'email'} {...register("email", {
                         required: true
                     })} />
-                    <Input label={'Password : '} labelClassName={'text-[#454545] text-md lg:text-lg font-semibold'} containerClassName={'flex justify-center gap-4'} type={'password'} {...register("password",{ required:true })} />
+                    <Input inputClassName={'w-[65%] lg:w-fit'} label={'Password : '} labelClassName={'text-[#454545] text-md text-[.925rem] lg:text-lg font-semibold'} containerClassName={'flex items-center w-[60%] justify-center mx-auto gap-4 lg:w-full'} type={'password'} {...register("password",{ required:true })} />
 
-                    {errors && <section className="text-red-600 font-medium">
+                    {errors && <section className="text-red-600 w-[80%] lg:w-[90%] mx-auto mt-1 font-medium">
                         {errors}
                     </section>}
 

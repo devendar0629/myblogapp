@@ -21,9 +21,9 @@ const Input = React.forwardRef(function Input({ type = 'text', placeholder = '',
                     ref={ref}
                     type={type}
                     id={id}
-                    className={(() => {
-                        return initialStyles ? `px-3.5 pt-[.2rem] pb-[.3rem] text-lg outline-none bg-[#999] rounded-md ${inputClassName}` : `${inputClassName}`
-                    })()} 
+                    className={
+                        (function() { return initialStyles ? `px-3.5 pt-[.2rem] pb-[.3rem] text-lg outline-none bg-[#999] rounded-md ${inputClassName}` : `${inputClassName}` })()
+                    }
                     {...props} />
 
             </section>

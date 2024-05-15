@@ -17,7 +17,6 @@ function Profile() {
     React.useEffect(() => {
         ;(async () => {
             const sessions = await authService.getAllSessions()
-            console.log(sessions);
         })()
     },[])
 

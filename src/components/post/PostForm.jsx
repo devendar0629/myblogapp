@@ -136,7 +136,7 @@ function PostForm() {
                 <form onSubmit={handleSubmit(handlePost)} className="bg-[#171717] flex flex-col px-6 py-6 lg:px-10 lg:py-10 rounded-lg shadow-lg items-center flex-nowrap w-full gap-7">
                     <Input
                         labelClassName={'text-[#EEE] text-md lg:text-lg font-medium whitespace-nowrap'}
-                        inputClassName={'file:rounded-lg hover:file:bg-sky-600 hover:file:shadow-lg hover:file:text-[#fff] file:text-lg mr-[-20px] file:font-medium font-medium text-[#eee] lg:file:px-3 file:py-[.195rem] file:cursor-pointer file:bg-white lg:file:mr-3 file:border-none shadow-md'}
+                        inputClassName={'file:rounded-lg hover:file:bg-sky-600 hover:file:shadow-lg hover:file:text-[#fff] file:text-lg mr-[-20px] file:font-medium font-medium text-[#eee] lg:file:px-4 file:py-[.195rem] file:cursor-pointer file:bg-white lg:file:mr-4 file:border-none shadow-md'}
                         containerClassName={'flex flex-row gap-2 ml-10 lg:ml-0 items-center'}
                         initialStyles={false}
                         label='Image : '
@@ -152,7 +152,7 @@ function PostForm() {
                         labelClassName={'text-[#EEE] font-medium whitespace-nowrap text-md lg:text-lg'}
                         initialStyles={false}
                         containerClassName={'flex flex-nowrap gap-2 items-center'}
-                        inputClassName={'rounded-md font-medium bg-[#999] pt-[.1rem] pb-[.2rem] px-3.5 text-md lg:text-lg focus:outline-none'}
+                        inputClassName={'rounded-md h-[4vh] font-medium bg-[#999] pt-[.1rem] pb-[.2rem] px-3.5 text-md lg:text-lg focus:outline-none'}
                         type='text'
                         label='Message : '
                         {...register("message", { required: true })}

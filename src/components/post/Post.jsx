@@ -66,7 +66,7 @@ function Post() {
             }
 
             {
-                post && <section className="bg-slate-600 flex flex-col flex-nowrap gap-8 mt-8 rounded-lg justify-start items-start mb-9 px-8 pb-8 pt-6 w-[70%] mx-auto">
+                post && <section className="bg-slate-600 flex flex-col flex-nowrap gap-8 mt-8 rounded-lg justify-start items-start mb-9 px-3 lg:px-8 pb-8 pt-6 w-[94%] lg:w-[70%] mx-auto">
                     {
                         isOwner && <section className="w-full -mb-[.4rem] text-lg right-8 flex flex-nowrap gap-3 justify-end">
                             <button onClick={handlePostEdit} className="px-3 rounded-md text-center py-[0.3rem] select-none bg-green-600">✏️</button>
@@ -75,7 +75,7 @@ function Post() {
                     }
 
                     {
-                        deleting && <Spinner />
+                        deleting && <Spinner className="ml-auto border-slate" />
                     }
 
                     <section className="w-full bg-[#ddd] rounded-md py-2 flex flex-nowrap flex-col gap-2 px-6">

@@ -22,6 +22,7 @@ function Signup() {
             setLoading(true)
             setErrors(null)
             if (data.password !== data.confirm) {
+                setLoading(false)
                 setErrors('Passwords don\'t match !');
                 return;
             }
@@ -33,7 +34,7 @@ function Signup() {
             if (resp) {
                 const login = await authService.login({email:data.email,password:data.password})
                 const preferences = await authService.updatePreferences({
-                    "bio":data.bio
+                    "bio":(data.bio == '') ? `I am ${data.name}` : data.bio
                 })
                 if(login && preferences){
                     dispatch(storeLogin(resp))
@@ -51,20 +52,20 @@ function Signup() {
     return (
         <>
             <section className="grow bg-slate-400 py-10">
-                <p className="text-center font-bold text-3xl underline underline-offset-3">Signup</p>
+                <p className="text-center font-bold text-2xl lg:text-3xl underline underline-offset-3">Signup</p>
                 <form className="bg-[#fff] shadow-xl py-10 rounded-md flex flex-col flex-nowrap items-center justify-center gap-6 mt-10 w-[94%] lg:w-[66%] mx-auto" onSubmit={handleSubmit(handleSignup)}>
 
-                    <Input label={'Name : '} labelClassName={'text-[#454545] whitespace-nowrap font-semibold text-lg'} containerClassName={'flex justify-center gap-4'} type={'text'} {...register("name", { required: true })} />
-                    <Input labelClassName={'text-[#454545] whitespace-nowrap font-semibold text-lg'} containerClassName={'flex justify-center gap-4'} label={'Email : '} type={'email'} {...register("email", { required: true })} />
-                    <Input label={'Password : '} labelClassName={'text-[#454545] whitespace-nowrap font-semibold text-lg'} containerClassName={'flex justify-center gap-4'} type={'password'} {...register("password", { required: true })} />
-                    <Input label={'Confirm : '} labelClassName={'text-[#454545] whitespace-nowrap font-semibold text-lg'} containerClassName={'flex justify-center gap-4'} type={'password'} {...register("confirm")} />
+                    <Input label={'Name : '} labelClassName={'text-[#454545] text-[0.925rem] whitespace-nowrap font-semibold lg:text-lg'} containerClassName={'flex justify-center gap-4'} type={'text'} {...register("name", { required: true })} />
+                    <Input labelClassName={'text-[#454545] text-[0.925rem] whitespace-nowrap font-semibold lg:text-lg'} containerClassName={'flex justify-center gap-4'} label={'Email : '} type={'email'} {...register("email", { required: true })} />
+                    <Input label={'Password : '} labelClassName={'text-[#454545] text-[0.925rem] whitespace-nowrap font-semibold lg:text-lg'} containerClassName={'flex justify-center w-[90%] lg:w-full gap-4'} type={'password'} {...register("password", { required: true })} />
+                    <Input label={'Confirm : '} labelClassName={'text-[#454545] text-[0.925rem] whitespace-nowrap font-semibold lg:text-lg'} containerClassName={'flex justify-center gap-4'} type={'password'} {...register("confirm")} />
 
                     <section className="px-7 gap-4 mx-auto flex flex-nowrap">
                         <label className="text-[#454545] whitespace-nowrap font-semibold text-lg">Bio : </label>
                         <textarea maxLength={96} {...register("bio", { required: false })} className="bg-[#aaa] placeholder:text-[1rem] focus:outline-none rounded-md pl-3 w-[15rem] mx-auto placeholder:text-[#222] text-[#222] max-h-[8vh] py-2 text-[1.1rem]" placeholder="Something about you ..."></textarea>
                     </section>
 
-                    {errors && <section className="text-red-600 font-medium">
+                    {errors && <section className="text-red-600 mx-auto w-[85%] font-medium">
                         {errors}
                     </section>}
 
